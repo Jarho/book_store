@@ -1,0 +1,185 @@
+/*解决高度塌陷*/
+.fixheight:before, .fixheight:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+/*去除默认样式*/
+* {
+	-webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	transition: background .3s;
+}
+
+/*标题*/
+.title {
+	max-width: 1470px;
+	margin: 30px auto 0px;
+	height:80px;
+	padding-top: 15px;
+	text-align: center;
+	color: white;
+	font: 50px "微软雅黑";
+	cursor: default;
+	background-color:  #2a69ad;
+}
+
+/*导航条*/
+.navdiv {
+	max-width: 1500px;
+	height: 25px;
+	margin: 5px auto 0px;
+}
+.navdiv .nav {	
+	background-color: #2a69ad;
+	margin: 0 1%;
+	width: 98%;
+	box-shadow: 0 2px 3px rgba(0,0,0,.3);
+}
+.nav li {
+	display: block;
+	width: 33.33333%;
+	float: left;
+	list-style: none;
+}
+.nav a:not(.quit),
+.nav span {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 5px 0;
+	
+}
+.nav a:hover:not(.quit),
+.nav span:hover {
+	background-color: #c00;
+}
+.nav span{
+	color: white;
+	cursor: default;
+}
+.nav a{
+	color: white;
+	text-decoration: none;
+}
+
+.nav .quit:hover {
+	cursor: pointer;
+}
+
+/*搜索框*/
+.search {
+	/*background-color: red;*/
+	max-width: 1500px;
+	height: 60px;
+	margin: 10px auto;
+}
+
+.search input {
+	height: 38px;
+	margin: 11px 1%;
+	width: 84%;
+	text-align: center;
+	/*border: 1px solid #CDCDCD;*/
+	border: 0;
+	background: #ddd;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+	border-radius: 3px;
+}
+
+.search input:hover, .search input:focus {
+	background: #F2F2F2;
+	box-shadow: 2px rgba(0, 0, 0, .2);
+}
+
+.search button {
+	background-color:#33cc77;
+	color: #fff;
+	height: 38px;
+	width: 12.7%;
+	border: 0;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+	border-radius: 3px;
+}
+
+.search button:hover, .search button:active {
+	background-color: #28ad63;
+	cursor: pointer;
+}
+
+/*表格*/
+.content {
+	margin: 10px auto;
+	max-width: 1500px;
+	font: 14px "微软雅黑";
+}
+
+.content table {
+	width: 98%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+}
+
+tbody td, thead th {
+	cursor: default;
+	/*border: 1px solid;*/
+	text-align: center;
+}
+
+.content thead tr {
+	width: 100%;
+	height: 60px;
+	background-color: #CDCDCD;
+	font-size: 15px;
+	border-radius: 3px;
+}
+
+.content tbody tr {
+	border-top: 1px groove;
+	height: 50px;
+}
+
+.content tbody tr:nth-child(2n) {
+	background-color: #F0F0F0;
+}
+
+.content tbody tr:hover {
+	background-color: #CDCDCD;
+}
+
+.noCommodity {
+	display: block;
+	font-size: 15px;
+	text-align: center;
+	margin-top: 80px;
+}
+
+/*购买删除修改*/
+.content .delete, .content .alter, .content .buy {
+	display: block;
+	width: 100%;
+	text-decoration: none;
+}
+
+.content .alter:hover, .content .delete:hover, .content .buy:hover {
+	cursor: pointer;
+}
+
+/*页脚*/
+.page{
+	/*background: yellow;*/
+	text-align: center;
+	margin-top: 20px;
+}
+.page a{
+	margin: 0px 10px;
+}
+.page span{
+	cursor: default;
+}

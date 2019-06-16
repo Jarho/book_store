@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vaf714.shop.mapper.CartMapper">
+    <insert id="addCart">
+        insert into cart(user_name, commodity_id, buy_num) values(#{userName},#{commodityId},#{buyNum})
+    </insert>
+
+    <update id="alterCart" parameterType="hashmap">
+        update cart set buy_num=#{buyNum} WHERE commodity_id=#{commodityId} and user_name=#{userName}
+    </update>
+
+    <update id="alterCartBuyNum" parameterType="cn.vaf714.shop.entity.CartVo">
+        update cart set buy_num=#{buyNum} where id=#{id}
+    </update>
+
+    <select id="countCartNum" resultType="Integer">
+        SELECT count(co.id) FROM cart ca, commodity co WHERE ca.user_name = #{name} AND co.id = ca.commodity_id
+    </select>
+
+    <select id="findCart" resultType="cn.vaf714.shop.entity.CartResultVo">
+        SELECT co.id, co.name commodityName, co.price commodityPrice, ca.buy_num buyNum
+        FROM
+         cart ca, commodity co
+        WHERE
+         ca.user_name = #{name}
+        AND
+          co.id = ca.commodity_id
+        LIMIT
+           #{startNum},#{num}
+    </select>
+<!--删除单个-->
+    <delete id="deleteSingleCart"  >
+        delete from cart where commodity_id=#{commodityId} and user_name=#{userName}
+    </delete>
+<!--删除用户购物车-->
+    <delete id="deleteUserCart"  >
+        delete from cart where  user_name=#{userName}
+    </delete>
+
+    <select id="findSingleCartById"  resultType="cn.vaf714.shop.entity.CartVo">
+        select user_name AS userName,commodity_id AS commodityId,buy_num AS buyNum,id AS id from cart where  commodity_id=#{commodityId} and user_name=#{userName}
+    </select>
+
+    <select id="findAll" resultType="cn.vaf714.shop.entity.CartResultVo">
+        select * from cart
+    </select>
+
+    <select id="findCommodityFromCartById" parameterType="hashmap" resultType="cn.vaf714.shop.entity.CartVo">
+        SELECT user_name AS userName,commodity_id AS commodityId,buy_num AS buyNum,id AS id FROM cart WHERE commodity_id=#{commodityId} and user_name=#{userName}
+    </select>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vaf714.shop.mapper.UserMapper">
+    <insert id="addUser" parameterType="cn.vaf714.shop.entity.UserVo">
+      INSERT INTO `user` (id, NAME, PASSWORD, role)
+      VALUES
+	  (NULL, #{name}, #{password}, 1);
+    </insert>
+
+    <select id="findUserByName" parameterType="cn.vaf714.shop.entity.UserVo" resultType="cn.vaf714.shop.entity.UserVo">
+        SELECT * FROM `user` WHERE `name`= #{name} AND `role`=#{role};
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vaf714.shop.mapper.CommodityMapper" >
+    <insert id="addCommodity" parameterType="cn.vaf714.shop.entity.CommodityVo">
+        insert into commodity values(#{id},#{name},#{price},#{num})
+    </insert>
+
+    <update id="alterCommodity" parameterType="cn.vaf714.shop.entity.CommodityUpdateVo">
+        update commodity set id=#{commodity.id},price=#{commodity.price},num=#{commodity.num} where id=#{preId}
+    </update>
+
+    <delete id="deleteCommodityById">
+        delete from commodity where id=#{id}
+    </delete>
+
+    <select id="countCommodityNum" resultType="java.lang.Integer">
+        select count(id) from commodity where id like concat('%',#{id},'%')
+    </select>
+
+    <select id="findCommodity" resultType="cn.vaf714.shop.entity.CommodityVo" parameterType="cn.vaf714.shop.entity.CommodityQueryVo">
+        select * from commodity where id like concat('%',#{id},'%') LIMIT #{startNum},#{num}
+    </select>
+
+    <select id="findSingleCommodityById" resultType="cn.vaf714.shop.entity.CommodityVo">
+        select * from commodity where id = #{id}
+    </select>
+
+    <select id="selectAllCommodity" resultType="cn.vaf714.shop.entity.CommodityVo">
+        SELECT * FROM commodity
+    </select>
+</mapper>

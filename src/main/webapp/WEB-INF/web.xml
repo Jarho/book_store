@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+  <!-- 全局错误页面 -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/error/error.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/WEB-INF/error/error.html</location>
+  </error-page>
+
+  <!-- 权限过滤器 -->
+  <context-param>
+    <param-name>adminUrls</param-name>
+    <param-value>/add_commodity.jsp,/alter_commodity.jsp,/manager.jsp</param-value>
+  </context-param>
+  <context-param>
+    <param-name>generalUserUrls</param-name>
+    <param-value>/show_cart.jsp</param-value>
+  </context-param>
+  <context-param>
+    <param-name>encoding</param-name>
+    <param-value>UTF-8</param-value>
+  </context-param>
+
+  <!--应用的根路径,log4j用到了-->
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>rootpath</param-value>
+  </context-param>
+  <!-- Spring 配置文件 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/*.xml</param-value>
+  </context-param>
+
+  <!--过滤器 -->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>cn.vaf714.shop.filter.CharacterEncodingIPFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>cn.vaf714.shop.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- 配置前端控制器 -->
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!--注意这个监听器要放在Spring Context 监听之前-->
+  <listener>
+    <listener-class>
+      org.springframework.web.util.Log4jConfigListener
+    </listener-class>
+  </listener>
+  <!-- Spring Context 监听 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+</web-app>
